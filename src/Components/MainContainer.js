@@ -1,14 +1,21 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import VideoContainer from "./VideoContainer";
 import VideoTitle from "./VideoTitle";
 import { useSelector } from "react-redux";
 
 const MainContainer = () => {
   const movies = useSelector((store) => store.movies?.nowPlayingMovies);
-  if (!movies) return;
+  const [mainMovie, setMainMovie] = useState(null);
 
-  const mainMovie = movies[0];
+  useEffect(() => {
+    if (movies && movies.length > 0) {
+      const randomIndex = Math.floor(Math.random() * movies.length);
+      setMainMovie(movies[randomIndex]);
+    }
+  }, [movies]);
+
+  if (!mainMovie) return null;
 
   const { original_title, overview, id } = mainMovie;
 
