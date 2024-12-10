@@ -1,26 +1,37 @@
 import React, { useRef } from "react";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { GEMINIAI_KEY } from "../Utilities/Constants";
-// import openai from "../Utilities/openai";
+import { fetchGPTSuggestions } from "../Utilities/fetchGPTSuggestions";
+import { API_OPTIONS } from "../Utilities/Constants";
+import { useDispatch } from "react-redux";
+import { addGptMovieResult } from "../Store/GPTSlice";
 
 const GPTSearch = () => {
   const searchText = useRef(null);
+  const dispatch = useDispatch();
+
+  const searchMovieTMDB = async (movie) => {
+    const data = await fetch(
+      "https://api.themoviedb.org/3/search/movie?query=" +
+        movie +
+        "&include_adult=false&language=en-US&page=1",
+      API_OPTIONS
+    );
+    const json = await data.json();
+    // const filteredData = await json?.results?.filter(
+    //   (result) =>
+    //     result?.original_title?.toLowerCase().includes(movie.toLowerCase()) ||
+    //     result?.title.toLowerCase().includes(movie.toLowerCase())
+    // );
+    return json.results;
+    // return filteredData;
+  };
 
   const handleGPTSearch = async () => {
-    const gptQuery =
-      "Act as a Movie Recommendation system and suggest some movies for the query : " +
-      searchText.current.value +
-      ". only give me names of 5 movies, comma seperated like the example result given ahead. Example Result: Gadar, Sholay, Don, Golmaal, Koi Mil Gaya";
-
-    const genAI = new GoogleGenerativeAI(GEMINIAI_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
-    const prompt = gptQuery;
-
-    const result = await model.generateContent(prompt);
-    console.log("gptResults-", result.response.text());
-
-    
+    const movieList = await fetchGPTSuggestions(searchText);
+    const promiseArray = movieList?.map((movie) => searchMovieTMDB(movie));
+    const tmdbResults = await Promise.all(promiseArray);
+    dispatch(
+      addGptMovieResult({ movieNames: movieList, movieResults: tmdbResults })
+    );
   };
 
   return (

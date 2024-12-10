@@ -5,7 +5,7 @@ import { auth } from "../Utilities/firebase";
 import { addUser, removeUser } from "../Store/userSlice";
 import { useNavigate } from "react-router-dom";
 import { LOGO, USER_AVATAR } from "../Utilities/Constants";
-import { showGptSearch } from "../Store/GPTSlice";
+import { removeGPTMovieResult, showGptSearch } from "../Store/GPTSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -26,6 +26,7 @@ const Header = () => {
 
   const toggleGptSearch = () => {
     dispatch(showGptSearch());
+    showGPTPage && dispatch(removeGPTMovieResult());
   };
 
   useEffect(() => {
