@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 const VideoContainer = ({ id }) => {
   useTrailerHook(id);
   const trailer = useSelector((store) => store.movies?.trailer);
-  console.log(trailer);
   return (
     <div className="">
       <iframe

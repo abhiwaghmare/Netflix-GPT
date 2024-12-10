@@ -12,10 +12,10 @@ const MoviesList = ({ category, movies }) => {
           className="flex items-center movies-row overflow-x-hidden  group"
         >
           <button
-            className="bg-gray-700 bg-opacity-40 text-white px-4 py-2 rounded-l z-index-10 absolute h-60 opacity-0 group-hover:opacity-100 transition-opacity"
+            className="bg-gray-700 bg-opacity-50 text-white px-4 py-2 rounded-l z-index-10 absolute h-60 opacity-0 group-hover:opacity-100 transition-opacity"
             onClick={() => {
               moviesRowRef.current.scrollBy({
-                left: -500,
+                left: -800,
                 behavior: "smooth",
               });
             }}
@@ -34,10 +34,10 @@ const MoviesList = ({ category, movies }) => {
             ))}
           </div>
           <button
-            className="bg-gray-700 bg-opacity-40 text-white px-4 py-2 rounded-r absolute -right-4 h-60 opacity-0 group-hover:opacity-100 transition-opacity"
+            className="bg-gray-700 bg-opacity-50 text-white px-4 py-2 rounded-r absolute right-0 h-60 opacity-0 group-hover:opacity-100 transition-opacity"
             onClick={() => {
               moviesRowRef.current.scrollBy({
-                left: 500,
+                left: 800,
                 behavior: "smooth",
               });
             }}

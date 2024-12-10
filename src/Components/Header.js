@@ -5,11 +5,13 @@ import { auth } from "../Utilities/firebase";
 import { addUser, removeUser } from "../Store/userSlice";
 import { useNavigate } from "react-router-dom";
 import { LOGO, USER_AVATAR } from "../Utilities/Constants";
+import { showGptSearch } from "../Store/GPTSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
   const Navigate = useNavigate();
   const user = useSelector((store) => store.user);
+  const showGPTPage = useSelector((store) => store.gpt.showGPTPage);
 
   const handleSignout = () => {
     signOut(auth)
@@ -20,6 +22,10 @@ const Header = () => {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const toggleGptSearch = () => {
+    dispatch(showGptSearch());
   };
 
   useEffect(() => {
@@ -46,6 +52,12 @@ const Header = () => {
       <img alt="logo" src={LOGO} width="160px" height="80px"></img>
       {user && (
         <div className="flex gap-5 h-10 mt-5">
+          <button
+            onClick={() => toggleGptSearch()}
+            className="bg-red-700 text-white py-2 px-4 rounded-lg shadow-md"
+          >
+            {!showGPTPage ? "GPT Search" : "HomePage"}
+          </button>
           <img alt="userProfile" src={USER_AVATAR} className="w-15 h-15"></img>
           <button
             className="bg-[#e50914] p-2 rounded-md text-white font-bold"
