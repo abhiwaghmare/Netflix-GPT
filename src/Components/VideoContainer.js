@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useTrailerHook from "../CustomHooks/useTrailerHook";
 import { useSelector } from "react-redux";
 
 const VideoContainer = ({ id }) => {
   useTrailerHook(id);
+
   const path = window.location.pathname;
   const trailer = useSelector((store) =>
     path.includes("browse")

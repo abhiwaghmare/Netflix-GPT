@@ -8,12 +8,16 @@ const MovieDetails = () => {
   window.scrollTo(0, 0);
   const movie = useSelector((store) => store.movies?.selectedMovie);
   if (!movie) return null;
-  const { original_title, overview, id } = movie;
+  const { original_title, overview, id, genre_ids } = movie;
   return (
     <div>
       <Header />
       <div>
-        <VideoTitle title={original_title} overview={overview} />
+        <VideoTitle
+          title={original_title}
+          overview={overview}
+          genres={genre_ids}
+        />
         <VideoContainer id={id} />
       </div>
     </div>

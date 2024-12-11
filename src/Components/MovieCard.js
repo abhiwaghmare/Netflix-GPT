@@ -19,7 +19,7 @@ const MovieCard = ({ movie }) => {
 
   return (
     <Link to={`/movie/${movie.id}`}>
-      <div className="w-48 shadow-xl m-3" onClick={() => handleMovieClick()}>
+      <div className="w-52 shadow-xl m-3" onClick={() => handleMovieClick()}>
         <img alt="movieCard" src={IMG_CDN_URL + movie?.poster_path}></img>
       </div>
     </Link>

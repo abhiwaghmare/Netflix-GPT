@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import { API_OPTIONS } from "../Utilities/Constants";
 import { useDispatch } from "react-redux";
-import { setTrailer } from "../Store/movieSlice";
+import {
+  removeSelectedMovieTrailer,
+  removeTrailer,
+  setTrailer,
+} from "../Store/movieSlice";
 import { setSelectedMovieTrailer } from "../Store/movieSlice";
 
 const useTrailerHook = (id) => {
@@ -17,13 +21,15 @@ const useTrailerHook = (id) => {
     const path = window.location.pathname;
     if (path.includes("browse")) {
       dispatch(setTrailer(trailer));
+      dispatch(removeSelectedMovieTrailer);
     } else if (path.includes("movie")) {
       dispatch(setSelectedMovieTrailer(trailer));
+      dispatch(removeTrailer());
     }
   };
   useEffect(() => {
     fetchTrailerData();
-  }, []);
+  }, [id]);
   return <div></div>;
 };
 

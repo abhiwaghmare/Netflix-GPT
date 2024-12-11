@@ -20,12 +20,17 @@ const MainContainer = () => {
   const mainMovie = useSelector((store) => store.movies?.bannerMovie);
 
   if (!mainMovie) return null;
+  console.log("mainMovie", mainMovie);
 
-  const { original_title, overview, id } = mainMovie;
+  const { original_title, overview, id, genre_ids } = mainMovie;
 
   return (
     <div>
-      <VideoTitle title={original_title} overview={overview} />
+      <VideoTitle
+        title={original_title}
+        overview={overview}
+        genres={genre_ids}
+      />
       <VideoContainer id={id} />
     </div>
   );
