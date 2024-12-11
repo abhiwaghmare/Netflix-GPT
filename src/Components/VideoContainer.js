@@ -4,7 +4,12 @@ import { useSelector } from "react-redux";
 
 const VideoContainer = ({ id }) => {
   useTrailerHook(id);
-  const trailer = useSelector((store) => store.movies?.trailer);
+  const path = window.location.pathname;
+  const trailer = useSelector((store) =>
+    path.includes("browse")
+      ? store.movies?.trailer
+      : store.movies?.selectedMovieTrailer
+  );
   return (
     <div className="">
       <iframe

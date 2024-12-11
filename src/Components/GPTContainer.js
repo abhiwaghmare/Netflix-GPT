@@ -1,8 +1,10 @@
 import React from "react";
 import GPTSearch from "./GPTSearch";
 import GPTSuggestions from "./GPTSuggestions";
+import { useSelector } from "react-redux";
 
 const GPTContainer = () => {
+  const movies = useSelector((store) => store.gpt?.movieNames?.length);
   return (
     <div>
       <div className="fixed">
@@ -13,7 +15,7 @@ const GPTContainer = () => {
       </div>
       <div className="absolute pt-[10%] w-screen">
         <GPTSearch />
-        <GPTSuggestions />
+        {movies && <GPTSuggestions />}
       </div>
     </div>
   );
