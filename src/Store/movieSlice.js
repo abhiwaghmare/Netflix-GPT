@@ -38,6 +38,7 @@ const movies = createSlice({
     setBannerMovie: (state, action) => {
       state.bannerMovie = action.payload;
     },
+
   },
 });
 
