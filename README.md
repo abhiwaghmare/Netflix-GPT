@@ -34,6 +34,7 @@ To get a local copy up and running, follow these steps:
    cd netflix-gpt
 
 2. **Install dependencies**:
+    ```sh
     npm install
 
 3. **Set up Firebase**:
@@ -44,6 +45,7 @@ To get a local copy up and running, follow these steps:
     Get your OpenAI API key and replace the placeholder value in src/Utilities/Constants.js.
 
 5. **Run the application**:
+    ```sh
     npm start
 
 ## Usage
